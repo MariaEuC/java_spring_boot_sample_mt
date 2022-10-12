@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <title>Ajax</title>
+</head>
+
+<body>
+    <h1>Alquiler de Salones de Fiestas</h1>
+
+    <div>
+        <h1>Categorias</h1>
+        <!-- <input type="text" id="idCategoria" placeholder="codigo categoria"> -->
+        <input type="text" id="nombreCategory" placeholder="nombre categoria">
+        <input type="text" id="descripcionCategory" placeholder="descripcion categoria">
+        <button onclick="traerInformacionCategory()"> Consultar</button>
+        <button onclick="guardarInformacionCategory()"> Insertar</button>
+
+    </div>
+
+    <div id="resultadoCategory">
+
+    </div>
+
+    <div>
+        <h1>Salones</h1>
+        <input type="text" id="ownerPartyroom" placeholder="dueño salon">
+        <input type="text" id="nombrePartyroom" placeholder="nombre salon ">
+        <input type="number" id="capacityPartyroom" placeholder="capacidad salon">
+        <input type="text" id="descripcionPartyroom" placeholder="descripcion salon ">
+        <input type="number" id="idCategory" placeholder="codigo categoria">
+
+        <button onclick="traerInformacionPartyroom()"> Consultar</button>
+        <button onclick="guardarInformacionPartyroom()"> Insertar</button>
+
+    </div>
+
+    <div id="resultado">
+
+    </div>
+
+    <div>
+        <h1>Cliente</h1>
+        <!-- <input type="text" id="idClient" placeholder="codigo cliente"> -->
+        <input type="text" id="nameClient" placeholder="nombre cliente ">
+        <input type="text" id="emailClient" placeholder="correo cliente ">
+        <input type="text" id="passwordClient" placeholder="password cliente">
+        <input type="number" id="ageClient" placeholder="edad cliente">
+
+        <button onclick="traerInformacionClient()"> Consultar</button>
+        <button onclick="guardarInformacionClient()"> Insertar</button>
+    </div>
+
+    <div id="resultadoClient">
+
+    </div>
+
+    <div>
+        <h1>Mensajes</h1>
+        <input type="text" id="mensaje" placeholder="texto mensaje">
+        <input type="number" id="idClienteM" placeholder="codigo cliente">
+        <input type="number" id="idSalonM" placeholder="codigo salon">
+
+        <button onclick="traerInformacionMessage()"> Consultar</button>
+        <button onclick="guardarInformacionMessage()"> Insertar</button>
+
+    </div>
+
+    <div id="resultadoMessage">
+
+    </div>
+
+
+    <div>
+        <h1>Reservacion</h1>
+        <!-- <input type="text" id="idPapeleria" placeholder="codigo articulo">  -->
+        <input type="date" id="fechaInicio" placeholder="fecha inicio">
+        <input type="date" id="fechaFinal" placeholder="fecha final">
+        <input type="number" id="idClienteR" placeholder="codigo cliente">
+        <input type="number" id="idSalonR" placeholder="codigo salon">
+
+        <button onclick="traerInformacionReservation()"> Consultar</button>
+        <button onclick="guardarInformacionReservation()"> Insertar</button>
+
+    </div>
+
+
+
+    <div>
+        <h1>Calificacion Reserva</h1>
+        <input type="number" id="idClientS" placeholder="codigo cliente">
+        <input type="number" id="idPartyroomS" placeholder="codigo salon">
+        <input type="text" id="mensaje" placeholder="mensaje calificacion reserva">
+        <input type="text" id="calificacion" placeholder="calificacion reserva">
+
+        <!-- <button onclick="traerInformacionScore()"> Consultar</button> -->
+        <button onclick="guardarInformacionScore()"> Insertar</button>
+
+    </div>
+
+
+    <div>
+        <h1>Usuarios Admins</h1>
+        <!-- <input type="text" id="idPapeleria" placeholder="codigo articulo">  -->
+        <input type="text" id="nameAmin" placeholder="nombre admin">
+        <input type="text" id="emailAdmin" placeholder="correo admin">
+        <input type="text" id="passwordAdmin" placeholder="password admin">
+
+        <button onclick="traerInformacionAdmin()"> Consultar</button>
+        <button onclick="guardarInformacionAdmin()"> Insertar</button>
+
+    </div>
+
+    <div id="resultadoAdmin">
+
+    </div>
+
+    <div id="resultadoReservation">
+
+    </div>
+
+
+</body>
+<script type="text/javascript" src="js/funciones.js"></script>
+
+</html>
