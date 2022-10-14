@@ -30,10 +30,11 @@
     <div>
         <h1>Salones</h1>
         <input type="text" id="ownerPartyroom" placeholder="dueño salon">
-        <input type="text" id="nombrePartyroom" placeholder="nombre salon ">
         <input type="number" id="capacityPartyroom" placeholder="capacidad salon">
-        <input type="text" id="descripcionPartyroom" placeholder="descripcion salon ">
         <input type="number" id="idCategory" placeholder="codigo categoria">
+        <input type="text" id="namePartyroom" placeholder="nombre salon ">
+        <input type="text" id="descriptionPartyroom" placeholder="descripcion salon ">
+
 
         <button onclick="traerInformacionPartyroom()"> Consultar</button>
         <button onclick="guardarInformacionPartyroom()"> Insertar</button>
@@ -62,9 +63,9 @@
 
     <div>
         <h1>Mensajes</h1>
-        <input type="text" id="mensaje" placeholder="texto mensaje">
-        <input type="number" id="idClienteM" placeholder="codigo cliente">
-        <input type="number" id="idSalonM" placeholder="codigo salon">
+        <input type="text" id="messageM" placeholder="texto mensaje">
+        <input type="number" id="idClientM" placeholder="codigo cliente">
+        <input type="number" id="idPartyroomM" placeholder="codigo salon">
 
         <button onclick="traerInformacionMessage()"> Consultar</button>
         <button onclick="guardarInformacionMessage()"> Insertar</button>
@@ -79,10 +80,10 @@
     <div>
         <h1>Reservacion</h1>
         <!-- <input type="text" id="idPapeleria" placeholder="codigo articulo">  -->
-        <input type="date" id="fechaInicio" placeholder="fecha inicio">
-        <input type="date" id="fechaFinal" placeholder="fecha final">
-        <input type="number" id="idClienteR" placeholder="codigo cliente">
-        <input type="number" id="idSalonR" placeholder="codigo salon">
+        <input type="date" id="dateInitial" placeholder="fecha inicio">
+        <input type="date" id="dateFinal" placeholder="fecha final">
+        <input type="number" id="idClientR" placeholder="codigo cliente">
+        <input type="number" id="idPartyroomR" placeholder="codigo salon">
 
         <button onclick="traerInformacionReservation()"> Consultar</button>
         <button onclick="guardarInformacionReservation()"> Insertar</button>
@@ -97,6 +98,7 @@
         <input type="number" id="idPartyroomS" placeholder="codigo salon">
         <input type="text" id="mensaje" placeholder="mensaje calificacion reserva">
         <input type="text" id="calificacion" placeholder="calificacion reserva">
+        <input type="number" id="idReservationS" placeholder="codigo reserva">
 
         <!-- <button onclick="traerInformacionScore()"> Consultar</button> -->
         <button onclick="guardarInformacionScore()"> Insertar</button>
