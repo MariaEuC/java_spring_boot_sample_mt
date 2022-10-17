@@ -27,4 +27,8 @@ public class RepositoryCategory {
         return crudRepositoryCategory.save(category);
     }
 
+    // public void delete (Category category){
+    // categoryCrudRepository.delete(category);
+    // }
+
 }

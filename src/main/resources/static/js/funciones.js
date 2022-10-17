@@ -1,6 +1,8 @@
 // ContentType: Cuando envíe datos al servidor, use este tipo de contenido. El valor predeterminado es application/x-www-form-urlencoded; charset=UTF-8, lo cual está bien para la mayoría de los casos.
 // DataType: El tipo de datos que espera del servidor. Si no se especifica ninguno, jQuery intentará inferirlo en función del tipo MIME de la respuesta. Puede ser text, xml, html, script, json, jsonp.
 
+//{"name":"cat1","description":"test category"}
+
 function guardarInformacionCategory() {
 
     $("#resultadoCategory").empty();
@@ -17,7 +19,7 @@ function guardarInformacionCategory() {
             datatype: "JSON",
             contentType: 'application/json',
             success: function (respuesta) {
-                //console.log(respuesta);
+                console.log(respuesta);
                 alert("Inserción exitosa");
             },
             error: function (xhr, status) {
@@ -52,12 +54,10 @@ function pintarRespuestaCategory(items) {
 
     $("#resultadoCategory").empty();
 
-    //declarar variables js
     let myTable = "<table>";
-    myTable += "<tr><th>Codigo</th><th>Nombre</th><th>Descripcion</th></tr>";
+    myTable += "<tr><th>Nombre</th><th>Descripcion</th></tr>";
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
-        myTable += "<td>" + items[i].id + "</td>";
         myTable += "<td>" + items[i].name + "</td>";
         myTable += "<td>" + items[i].description + "</td>";
         // myTable+="<td><button onclick='borrarCategoria("+items[i].id+")'>Borrar</button>";
@@ -68,61 +68,7 @@ function pintarRespuestaCategory(items) {
 }
 
 
-
-
-function traerInformacionPartyroom() {
-    $.ajax(
-        {
-            url: "http://localhost:8080/api/Partyroom/all",
-            type: "GET",
-            datatype: "JSON",
-            success: function (respuesta) {
-                console.log(respuesta);
-                pintarRespuestaPartyroom(respuesta);
-            },
-            error: function (xhr, status) {
-                alert('Operacion no satisfactoria,' + xhr.status);
-            }
-
-
-        }
-
-    );
-}
-
-// [{"id":1,"name":"Gw shimano 25","brand":"GW","year":2013,
-// "description":"Gw shimano 25",
-// "category":{"id":1,"name":"cat1","description":"test category"},"messages":[],"reservations":[]}]
-
-function pintarRespuestaPartyroom(items) {
-
-    $("#resultado").empty();
-
-    //declarar variables js
-    let myTable = "<table>";
-    myTable += "<tr><th>Codigo</th><th>Dueño</th><th>Nombre</th><th>Capacidad</th><th>Descripcion</th><th>Codigo Categoria</th><th>Nombre Categoria</th><th>Descripcion Categoria</th> <th>Mensaje</th><th>Reservacion</th></tr>";
-    for (i = 0; i < items.length; i++) {
-        myTable += "<tr>";
-
-        myTable += "<td>" + items[i].id + "</td>";
-        myTable += "<td>" + items[i].owner + "</td>";
-        myTable += "<td>" + items[i].name + "</td>";
-        myTable += "<td>" + items[i].capacity + "</td>";
-        myTable += "<td>" + items[i].description + "</td>";
-        myTable += "<td>" + items[i].category.id + "</td>";
-        myTable += "<td>" + items[i].category.name + "</td>";
-        myTable += "<td>" + items[i].category.description + "</td>";
-        // myTable += "<td>" + items[i].messages + "</td>";
-        // myTable += "<td>" + items[i].reservations + "</td>";
-        // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
-        myTable += "</tr>";
-    }
-    myTable += "</table>";
-    $("#resultado").append(myTable);
-}
-
-
-//{"brand":"GW","year":2013,"category":{"id":1},"name":"Gw shimano 25","description":"Gw shimano 25"}
+//{"owner":"BestParties sas","capacity":200,"category":{"id":1},"name":"Salon para viejoteca","description":"Salon para viejoteca"}
 function guardarInformacionPartyroom() {
 
     $("#resultado").empty();
@@ -151,7 +97,55 @@ function guardarInformacionPartyroom() {
 }
 
 
+function traerInformacionPartyroom() {
+    $.ajax(
+        {
+            url: "http://localhost:8080/api/Partyroom/all",
+            type: "GET",
+            datatype: "JSON",
+            success: function (respuesta) {
+                console.log(respuesta);
+                pintarRespuestaPartyroom(respuesta);
+            },
+            error: function (xhr, status) {
+                alert('Operacion no satisfactoria,' + xhr.status);
+            }
 
+
+        }
+
+    );
+}
+
+/*[{"id":1,"name":"Salon para viejoteca","owner":"BestParties sas","capacity":200,"description":"Salon para viejoteca",
+"category":{"id":1,"name":"cat1","description":"test category"},
+"messages":[],
+"reservations":[]}]
+*/
+function pintarRespuestaPartyroom(items) {
+
+    $("#resultado").empty();
+
+    //declarar variables js
+    let myTable = "<table>";
+    myTable += "<tr><th>Nombre</th><th>Dueño</th><th>Capacidad</th><th>Descripcion</th><th>Nombre Categoria</th><th>Descripcion Categoria</th></tr>";
+    for (i = 0; i < items.length; i++) {
+        myTable += "<tr>";
+
+        myTable += "<td>" + items[i].name + "</td>";
+        myTable += "<td>" + items[i].owner + "</td>";
+        myTable += "<td>" + items[i].capacity + "</td>";
+        myTable += "<td>" + items[i].description + "</td>";
+        myTable += "<td>" + items[i].category.name + "</td>";
+        myTable += "<td>" + items[i].category.description + "</td>";
+        // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
+        myTable += "</tr>";
+    }
+    myTable += "</table>";
+    $("#resultado").append(myTable);
+}
+
+//{"name":"Agustin Parra","email":"agustin@gmail.com","password":"agustin123","age":18}
 function guardarInformacionClient() {
 
     $("#resultadoClient").empty();
@@ -195,23 +189,20 @@ function traerInformacionClient() {
     );
 }
 
-
+// [{"idClient":1,"email":"agustin@gmail.com","password":"agustin123","name":"Agustin Parra","age":18,"messages":[],"reservations":[]}]
 function pintarRespuestaClient(items) {
 
     $("#resultadoClient").empty();
 
     //declarar variables js
     let myTable = "<table>";
-    myTable += "<tr><th>Codigo</th><th> Correo</th><th>Password</th><th>Nombre</th><th>Edad</th><th>Mensaje</th><th>Reservaciones</th></tr>";
+    myTable += "<tr><th>Codigo</th><th> Correo</th><th>Nombre</th><th>Edad</th></tr>";
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
         myTable += "<td>" + items[i].idClient + "</td>";
         myTable += "<td>" + items[i].email + "</td>";
-        myTable += "<td>" + items[i].password + "</td>";
         myTable += "<td>" + items[i].name + "</td>";
         myTable += "<td>" + items[i].age + "</td>";
-        // myTable += "<td>" + items[i].messages + "</td>";
-        // myTable += "<td>" + items[i].reservations + "</td>";
         // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
         myTable += "</tr>";
     }
@@ -219,24 +210,24 @@ function pintarRespuestaClient(items) {
     $("#resultadoClient").append(myTable);
 }
 
+//{"messageText":"Me gusta.","client":{"idClient":1},"partyroom":{"id":1}}
 
 function guardarInformacionMessage() {
 
     $("#resultadoMessage").empty();
 
-    let myData = { messageText: $("#mensaje").val(), client: { idClient: $("#idClienteM").val() }, partyroom: { id: $("#idSalonM").val() } }
+    let myData = { messageText: $("#messageM").val(), client: { idClient: $("#idClientM").val() }, partyroom: { id: $("#idPartyroomM").val() } }
     let dataToSend = JSON.stringify(myData);
 
     $.ajax(
         {
-
             url: 'http://localhost:8080/api/Message/save',
             type: 'POST',
             data: dataToSend,
             datatype: "JSON",
             contentType: 'application/json',
             success: function (respuesta) {
-                //console.log(respuesta);
+                console.log(respuesta);
                 alert("Inserción exitosa");
             },
             error: function (xhr, status) {
@@ -267,24 +258,24 @@ function traerInformacionMessage() {
     );
 }
 
-
+/* [{"idMessage":1,"messageText":"Me gusta.",
+"partyroom":{"id":1,"name":"Salon para viejoteca","owner":"BestParties sas","capacity":200,"description":"Salon para viejoteca",
+"category":{"id":1,"name":"cat1","description":"test category"}},
+"client":{"idClient":1,"email":"agustin@gmail.com","password":"agustin123","name":"Agustin Parra","age":18}}]
+*/
 function pintarRespuestaMessage(items) {
 
     $("#resultadoMessage").empty();
 
     //declarar variables js
     let myTable = "<table>";
-    myTable += "<tr><th>Codigo</th><th> Mensaje</th><th>Codigo Partyroom</th><th>Nombre Partyroom</th><th>Capacidad Partyroom</th><th>Dueño Partyroom</th><th>Descripcion Partyroom</th><th>Codigo Cliente</th><th>Nombre Cliente</th></tr>";
+    myTable += "<tr><th> Mensaje</th><th>Nombre Partyroom</th><th>Capacidad Partyroom</th><th>Descripcion Partyroom</th><th>Nombre Cliente</th></tr>";
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
-        myTable += "<td>" + items[i].idMessage + "</td>";
         myTable += "<td>" + items[i].messageText + "</td>";
-        myTable += "<td>" + items[i].partyroom.id + "</td>";
         myTable += "<td>" + items[i].partyroom.name + "</td>";
         myTable += "<td>" + items[i].partyroom.capacity + "</td>";
-        myTable += "<td>" + items[i].partyroom.owner + "</td>";
         myTable += "<td>" + items[i].partyroom.description + "</td>";
-        myTable += "<td>" + items[i].client.idClient + "</td>";
         myTable += "<td>" + items[i].client.name + "</td>";
 
         // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
@@ -294,8 +285,7 @@ function pintarRespuestaMessage(items) {
     $("#resultadoMessage").append(myTable);
 }
 
-// {"startDate":"2020-12-20","devolutionDate":"2020-12-20",
-// "client":{"idClient":1},"bike":{"id":1}}
+// 	{"startDate":"2020-12-20","devolutionDate":"2020-12-20","client":{"idClient":1},"partyroom":{"id":1}}
 function guardarInformacionReservation() {
 
     $("#resultadoReservation").empty();
@@ -343,25 +333,38 @@ function traerInformacionReservation() {
     );
 }
 
-
+/*[{"idReservation":1,"startDate":"2020-12-20T00:00:00.000+00:00","devolutionDate":"2020-12-20T00:00:00.000+00:00","status":"created",
+"partyroom":{"id":1,"name":"Salon para viejoteca","owner":"BestParties sas","capacity":200,"description":"Salon para viejoteca",
+"category":{"id":1,"name":"cat1","description":"test category"},
+"messages":[{"idMessage":1,"messageText":"Me gusta."}]},
+"client":{"idClient":1,"email":"agustin@gmail.com","password":"agustin123","name":"Agustin Parra","age":18},
+"score":null}]
+*/
 function pintarRespuestaReservation(items) {
 
     $("#resultadoReservation").empty();
 
     //declarar variables js
     let myTable = "<table>";
-    myTable += "<tr><th>Codigo Res</th><th> Fecha Inicio</th><th>Fecha fin</th><th>Status</th><th>Codigo Partyroom</th><th>Nombre Partyroom</th><th>Codigo Cliente</th><th>Nombre Cliente</th><th>Calificacion</th></tr>";
+    myTable += "<tr><th>Codigo Reservacion</th><th> Fecha Inicio</th><th>Fecha Fin</th><th>Status</th><th>Nombre Partyroom</th><th>Codigo Cliente</th>
+    <th>Nombre Cliente</th></tr><th>Correo Cliente</th><th>Calificacion</th><th>Mensaje Calificacion</th></tr>";
+
+    /*
+     <th>Mensaje</th>
+     */
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
         myTable += "<td>" + items[i].idReservation + "</td>";
         myTable += "<td>" + items[i].startDate + "</td>";
         myTable += "<td>" + items[i].devolutionDate + "</td>";
         myTable += "<td>" + items[i].status + "</td>";
-        myTable += "<td>" + items[i].partyroom.id + "</td>";
         myTable += "<td>" + items[i].partyroom.name + "</td>";
+        //myTable += "<td>" + items[i].category.name + "</td>";
         myTable += "<td>" + items[i].client.idClient + "</td>";
         myTable += "<td>" + items[i].client.name + "</td>";
+        myTable += "<td>" + items[i].client.email + "</td>";
         myTable += "<td>" + items[i].score.stars + "</td>";
+        myTable += "<td>" + items[i].score.messageText + "</td>";
 
         // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
         myTable += "</tr>";
@@ -369,12 +372,13 @@ function pintarRespuestaReservation(items) {
     myTable += "</table>";
     $("#resultadoReservation").append(myTable);
 }
-///
+
+
 function guardarInformacionScore() {
 
     $("#resultadoScore").empty();
 
-    let myData = { messageText: $("#mensaje").val(), stars: $("#calificacion").val() }
+    let myData = { messageText: $("#mensajeR").val(), stars: $("#calificacion").val(), reservation: { idReservation: $("#idReservacion").val() } }
     let dataToSend = JSON.stringify(myData);
 
     $.ajax(
@@ -403,7 +407,7 @@ function guardarInformacionAdmin() {
 
     $("#resultadoAdmin").empty();
 
-    let myData = { name: $("#nameAdmin").val(), email: $("#emailAdmin").val(), password: $("#passwordAmin").val() }
+    let myData = { name: $("#nameAdmin").val(), email: $("#emailAdmin").val(), password: $("#passwordAdmin").val() }
     let dataToSend = JSON.stringify(myData);
 
     $.ajax(
@@ -450,15 +454,14 @@ function pintarRespuestaAdmin(items) {
 
     $("#resultadoAdmin").empty();
 
-    //declarar variables js
+
     let myTable = "<table>";
-    myTable += "<tr><th>Codigo Admin</th><th> Nombre Admin</th><th>Email Admin</th><th>Password Admin</th></tr>";
+    myTable += "<tr><th>Codigo Admin</th><th> Nombre Admin</th><th>Email Admin</th></tr>";
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
         myTable += "<td>" + items[i].idAdmin + "</td>";
         myTable += "<td>" + items[i].name + "</td>";
         myTable += "<td>" + items[i].email + "</td>";
-        myTable += "<td>" + items[i].password + "</td>";
 
         // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
         myTable += "</tr>";
@@ -467,3 +470,48 @@ function pintarRespuestaAdmin(items) {
     $("#resultadoAdmin").append(myTable);
 }
 
+function traerInformacionScore() {
+    $.ajax(
+        {
+            url: "http://localhost:8080/api/Score/all",
+            type: "GET",
+            datatype: "JSON",
+            success: function (respuesta) {
+                pintarRespuestaScore(respuesta);
+            },
+            error: function (xhr, status) {
+                alert('Operacion no satisfactoria,' + xhr.status);
+            }
+
+
+        }
+
+    );
+}
+
+
+function pintarRespuestaScore(items) {
+
+    $("#resultadoScore").empty();
+
+    //declarar variables js
+    let myTable = "<table>";
+    myTable += "<tr><th>Codigo Res</th><th> Fecha Inicio</th><th>Fecha fin</th><th>Status</th><th>Codigo Partyroom</th><th>Nombre Partyroom</th><th>Codigo Cliente</th><th>Nombre Cliente</th><th>Calificacion</th></tr>";
+    for (i = 0; i < items.length; i++) {
+        myTable += "<tr>";
+        myTable += "<td>" + items[i].reservation.idReservation + "</td>";
+        myTable += "<td>" + items[i].reservation.startDate + "</td>";
+        myTable += "<td>" + items[i].reservation.devolutionDate + "</td>";
+        myTable += "<td>" + items[i].reservation.status + "</td>";
+        myTable += "<td>" + items[i].reservation.partyroom.idPartyroom + "</td>";
+        myTable += "<td>" + items[i].reservation.partyroom.name + "</td>";
+        myTable += "<td>" + items[i].reservation.client.idClient + "</td>";
+        myTable += "<td>" + items[i].reservation.client.name + "</td>";
+        // myTable += "<td>" + items[i].stars + "</td>";
+
+        // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
+        myTable += "</tr>";
+    }
+    myTable += "</table>";
+    $("#resultadoScore").append(myTable);
+}

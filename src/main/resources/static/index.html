@@ -15,7 +15,6 @@
 
     <div>
         <h1>Categorias</h1>
-        <!-- <input type="text" id="idCategoria" placeholder="codigo categoria"> -->
         <input type="text" id="nombreCategory" placeholder="nombre categoria">
         <input type="text" id="descripcionCategory" placeholder="descripcion categoria">
         <button onclick="traerInformacionCategory()"> Consultar</button>
@@ -62,9 +61,9 @@
 
     <div>
         <h1>Mensajes</h1>
-        <input type="text" id="mensaje" placeholder="texto mensaje">
-        <input type="number" id="idClienteM" placeholder="codigo cliente">
-        <input type="number" id="idSalonM" placeholder="codigo salon">
+        <input type="text" id="messageM" placeholder="texto mensaje">
+        <input type="number" id="idClientM" placeholder="codigo cliente">
+        <input type="number" id="idPartyroomM" placeholder="codigo salon">
 
         <button onclick="traerInformacionMessage()"> Consultar</button>
         <button onclick="guardarInformacionMessage()"> Insertar</button>
@@ -78,7 +77,7 @@
 
     <div>
         <h1>Reservacion</h1>
-        <!-- <input type="text" id="idPapeleria" placeholder="codigo articulo">  -->
+
         <input type="date" id="fechaInicio" placeholder="fecha inicio">
         <input type="date" id="fechaFinal" placeholder="fecha final">
         <input type="number" id="idClienteR" placeholder="codigo cliente">
@@ -91,23 +90,29 @@
 
 
 
-    <div>
-        <h1>Calificacion Reserva</h1>
-        <input type="number" id="idClientS" placeholder="codigo cliente">
-        <input type="number" id="idPartyroomS" placeholder="codigo salon">
-        <input type="text" id="mensaje" placeholder="mensaje calificacion reserva">
-        <input type="text" id="calificacion" placeholder="calificacion reserva">
-
-        <!-- <button onclick="traerInformacionScore()"> Consultar</button> -->
-        <button onclick="guardarInformacionScore()"> Insertar</button>
+    <div id="resultadoReservation">
 
     </div>
 
 
+
+    <div>
+        <h1>Calificacion Reserva</h1>
+        <input type="text" id="mensajeR" placeholder="mensaje calificacion reserva">
+        <input type="text" id="calificacion" placeholder="calificacion reserva">
+        <input type="text" id="idReservacion" placeholder="id reserva">
+
+        <button onclick="guardarInformacionScore()"> Insertar</button>
+
+    </div>
+
+    <div id="resultadoScore">
+
+    </div>
+
     <div>
         <h1>Usuarios Admins</h1>
-        <!-- <input type="text" id="idPapeleria" placeholder="codigo articulo">  -->
-        <input type="text" id="nameAmin" placeholder="nombre admin">
+        <input type="text" id="nameAdmin" placeholder="nombre admin">
         <input type="text" id="emailAdmin" placeholder="correo admin">
         <input type="text" id="passwordAdmin" placeholder="password admin">
 
@@ -119,11 +124,6 @@
     <div id="resultadoAdmin">
 
     </div>
-
-    <div id="resultadoReservation">
-
-    </div>
-
 
 </body>
 <script type="text/javascript" src="js/funciones.js"></script>
