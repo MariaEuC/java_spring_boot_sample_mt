@@ -21,10 +21,11 @@ public class Partyroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String name;
     private String owner;
     private Integer capacity;
     private String description;
-    private String name;
+
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
@@ -33,8 +34,11 @@ public class Partyroom {
 
     @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "partyroom")
     @JsonIgnoreProperties({ "partyroom", "client" })
-    // @JsonIgnoreProperties({"bike"})
     private List<Message> messages;
+
+    @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "partyroom")
+    @JsonIgnoreProperties({ "partyroom", "client" })
+    private List<Reservation> reservations;
 
     public Integer getId() {
         return id;
@@ -42,6 +46,14 @@ public class Partyroom {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getOwner() {
@@ -68,14 +80,6 @@ public class Partyroom {
         this.description = description;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Category getCategory() {
         return category;
     }
@@ -84,4 +88,19 @@ public class Partyroom {
         this.category = category;
     }
 
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 }

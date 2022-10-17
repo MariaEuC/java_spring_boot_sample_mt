@@ -1,11 +1,6 @@
 package com.ciclo3.mt.reto3.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -19,7 +14,7 @@ public class Score {
     private String messageText;
     private Integer stars;
 
-    @OneToOne
+    @OneToOne(mappedBy = "score")
     @JsonIgnoreProperties("score")
     private Reservation reservation;
 
@@ -48,11 +43,10 @@ public class Score {
     }
 
     public Reservation getReservation() {
-        return this.reservation;
+        return reservation;
     }
 
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
     }
-
 }

@@ -1,6 +1,8 @@
 // ContentType: Cuando envíe datos al servidor, use este tipo de contenido. El valor predeterminado es application/x-www-form-urlencoded; charset=UTF-8, lo cual está bien para la mayoría de los casos.
 // DataType: El tipo de datos que espera del servidor. Si no se especifica ninguno, jQuery intentará inferirlo en función del tipo MIME de la respuesta. Puede ser text, xml, html, script, json, jsonp.
 
+//{"name":"cat1","description":"test category"}
+
 function guardarInformacionCategory() {
 
     $("#resultadoCategory").empty();
@@ -11,13 +13,13 @@ function guardarInformacionCategory() {
     $.ajax(
         {
 
-            url: 'http://129.158.213.90/api/Category/save',
+            url: 'http://localhost:8080/api/Category/save',
             type: 'POST',
             data: dataToSend,
             datatype: "JSON",
             contentType: 'application/json',
             success: function (respuesta) {
-                //console.log(respuesta);
+                console.log(respuesta);
                 alert("Inserción exitosa");
             },
             error: function (xhr, status) {
@@ -32,7 +34,7 @@ function guardarInformacionCategory() {
 function traerInformacionCategory() {
     $.ajax(
         {
-            url: "http://129.158.213.90/api/Category/all",
+            url: "http://localhost:8080/api/Category/all",
             type: "GET",
             datatype: "JSON",
             success: function (respuesta) {
@@ -52,12 +54,10 @@ function pintarRespuestaCategory(items) {
 
     $("#resultadoCategory").empty();
 
-    //declarar variables js
     let myTable = "<table>";
-    myTable += "<tr><th>Codigo</th><th>Nombre</th><th>Descripcion</th></tr>";
+    myTable += "<tr><th>Nombre</th><th>Descripcion</th></tr>";
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
-        myTable += "<td>" + items[i].id + "</td>";
         myTable += "<td>" + items[i].name + "</td>";
         myTable += "<td>" + items[i].description + "</td>";
         // myTable+="<td><button onclick='borrarCategoria("+items[i].id+")'>Borrar</button>";
@@ -68,12 +68,39 @@ function pintarRespuestaCategory(items) {
 }
 
 
+//{"owner":"BestParties sas","capacity":200,"category":{"id":1},"name":"Salon para viejoteca","description":"Salon para viejoteca"}
+function guardarInformacionPartyroom() {
+
+    $("#resultado").empty();
+
+    let myData = { owner: $("#ownerPartyroom").val(), capacity: $("#capacityPartyroom").val(), category: { id: $("#idCategory").val() }, name: $("#nombrePartyroom").val(), description: $("#descripcionPartyroom").val() }
+    let dataToSend = JSON.stringify(myData);
+
+    $.ajax(
+        {
+
+            url: 'http://localhost:8080/api/Partyroom/save',
+            type: 'POST',
+            data: dataToSend,
+            datatype: "JSON",
+            contentType: 'application/json',
+            success: function (respuesta) {
+                //console.log(respuesta);
+                alert("Inserción exitosa");
+            },
+            error: function (xhr, status) {
+                alert('Operacion no satisfactoria,' + xhr.status);
+            }
+
+        }
+    );
+}
 
 
 function traerInformacionPartyroom() {
     $.ajax(
         {
-            url: "http://129.158.213.90/api/Partyroom/all",
+            url: "http://localhost:8080/api/Partyroom/all",
             type: "GET",
             datatype: "JSON",
             success: function (respuesta) {
@@ -101,20 +128,16 @@ function pintarRespuestaPartyroom(items) {
 
     //declarar variables js
     let myTable = "<table>";
-    myTable += "<tr><th>Codigo</th><th>Nombre</th><th>Dueño</th><th>Capacidad</th><th>Descripcion</th><th>Codigo Categoria</th><th>Nombre Categoria</th><th>Descripcion Categoria</th><th>Mensajes</th><th>Reservas</th></tr>";
+    myTable += "<tr><th>Nombre</th><th>Dueño</th><th>Capacidad</th><th>Descripcion</th><th>Nombre Categoria</th><th>Descripcion Categoria</th></tr>";
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
 
-        myTable += "<td>" + items[i].id + "</td>";
         myTable += "<td>" + items[i].name + "</td>";
         myTable += "<td>" + items[i].owner + "</td>";
         myTable += "<td>" + items[i].capacity + "</td>";
         myTable += "<td>" + items[i].description + "</td>";
-        myTable += "<td>" + items[i].category.id + "</td>";
         myTable += "<td>" + items[i].category.name + "</td>";
         myTable += "<td>" + items[i].category.description + "</td>";
-        myTable += "<td>" + items[i].messages + "</td>";
-        myTable += "<td>" + items[i].reservations + "</td>";
         // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
         myTable += "</tr>";
     }
@@ -122,37 +145,7 @@ function pintarRespuestaPartyroom(items) {
     $("#resultado").append(myTable);
 }
 
-
-//{"brand":"GW","year":2013,"category":{"id":1},"name":"Gw shimano 25","description":"Gw shimano 25"}
-function guardarInformacionPartyroom() {
-
-    $("#resultado").empty();
-
-    let myData = { owner: $("#ownerPartyroom").val(), capacity: $("#capacityPartyroom").val(), category: { id: $("#idCategory").val() }, name: $("#namePartyroom").val(), description: $("#descriptionPartyroom").val() }
-    let dataToSend = JSON.stringify(myData);
-
-    $.ajax(
-        {
-
-            url: 'http://129.158.213.90/api/Partyroom/save',
-            type: 'POST',
-            data: dataToSend,
-            datatype: "JSON",
-            contentType: 'application/json',
-            success: function (respuesta) {
-                //console.log(respuesta);
-                alert("Inserción exitosa");
-            },
-            error: function (xhr, status) {
-                alert('Operacion no satisfactoria,' + xhr.status);
-            }
-
-        }
-    );
-}
-
-
-
+//{"name":"Agustin Parra","email":"agustin@gmail.com","password":"agustin123","age":18}
 function guardarInformacionClient() {
 
     $("#resultadoClient").empty();
@@ -163,7 +156,7 @@ function guardarInformacionClient() {
     $.ajax(
         {
 
-            url: 'http://129.158.213.90/api/Client/save',
+            url: 'http://localhost:8080/api/Client/save',
             type: 'POST',
             data: dataToSend,
             datatype: "JSON",
@@ -183,7 +176,7 @@ function guardarInformacionClient() {
 function traerInformacionClient() {
     $.ajax(
         {
-            url: "http://129.158.213.90/api/Client/all",
+            url: "http://localhost:8080/api/Client/all",
             type: "GET",
             datatype: "JSON",
             success: function (respuesta) {
@@ -196,23 +189,20 @@ function traerInformacionClient() {
     );
 }
 
-
+// [{"idClient":1,"email":"agustin@gmail.com","password":"agustin123","name":"Agustin Parra","age":18,"messages":[],"reservations":[]}]
 function pintarRespuestaClient(items) {
 
     $("#resultadoClient").empty();
 
     //declarar variables js
     let myTable = "<table>";
-    myTable += "<tr><th>Codigo</th><th> Correo</th><th>Password</th><th>Nombre</th><th>Edad</th><th>Mensajes</th><th>Reservaciones</th></tr>";
+    myTable += "<tr><th>Codigo</th><th> Correo</th><th>Nombre</th><th>Edad</th></tr>";
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
         myTable += "<td>" + items[i].idClient + "</td>";
         myTable += "<td>" + items[i].email + "</td>";
-        myTable += "<td>" + items[i].password + "</td>";
         myTable += "<td>" + items[i].name + "</td>";
         myTable += "<td>" + items[i].age + "</td>";
-        myTable += "<td>" + items[i].messages + "</td>";
-        myTable += "<td>" + items[i].reservations + "</td>";
         // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
         myTable += "</tr>";
     }
@@ -220,6 +210,7 @@ function pintarRespuestaClient(items) {
     $("#resultadoClient").append(myTable);
 }
 
+//{"messageText":"Me gusta.","client":{"idClient":1},"partyroom":{"id":1}}
 
 function guardarInformacionMessage() {
 
@@ -230,14 +221,13 @@ function guardarInformacionMessage() {
 
     $.ajax(
         {
-
-            url: 'http://129.158.213.90/api/Message/save',
+            url: 'http://localhost:8080/api/Message/save',
             type: 'POST',
             data: dataToSend,
             datatype: "JSON",
             contentType: 'application/json',
             success: function (respuesta) {
-                //console.log(respuesta);
+                console.log(respuesta);
                 alert("Inserción exitosa");
             },
             error: function (xhr, status) {
@@ -251,7 +241,7 @@ function guardarInformacionMessage() {
 function traerInformacionMessage() {
     $.ajax(
         {
-            url: "http://129.158.213.90/api/Message/all",
+            url: "http://localhost:8080/api/Message/all",
             type: "GET",
             datatype: "JSON",
             success: function (respuesta) {
@@ -283,22 +273,13 @@ function pintarRespuestaMessage(items) {
 
     //declarar variables js
     let myTable = "<table>";
-    myTable += "<tr><th>Codigo</th><th> Mensaje</th><th>Codigo Partyroom</th><th>Nombre Partyroom</th><th>Capacidad Partyroom</th><th>Dueño Partyroom</th><th>Descripcion Partyroom</th><th>Codigo Categoria</th><th>Nombre Categoria</th><th>Descripcion Categoria</th><th>Codigo Cliente</th><th>Nombre Cliente</th></tr>";
+    myTable += "<tr><th> Mensaje</th><th>Nombre Partyroom</th><th>Capacidad Partyroom</th><th>Descripcion Partyroom</th><th>Nombre Cliente</th></tr>";
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
-        myTable += "<td>" + items[i].idMessage + "</td>";
         myTable += "<td>" + items[i].messageText + "</td>";
-        myTable += "<td>" + items[i].partyroom.id + "</td>";
         myTable += "<td>" + items[i].partyroom.name + "</td>";
-        myTable += "<td>" + items[i].partyroom.owner + "</td>";
         myTable += "<td>" + items[i].partyroom.capacity + "</td>";
         myTable += "<td>" + items[i].partyroom.description + "</td>";
-        myTable += "<td>" + items[i].category.id + "</td>";
-        myTable += "<td>" + items[i].category.name + "</td>";
-        myTable += "<td>" + items[i].category.description + "</td>";
-        myTable += "<td>" + items[i].client.idClient + "</td>";
-        myTable += "<td>" + items[i].client.email + "</td>";
-        myTable += "<td>" + items[i].client.password + "</td>";
         myTable += "<td>" + items[i].client.name + "</td>";
         myTable += "<td>" + items[i].client.age + "</td>";
 
@@ -309,9 +290,7 @@ function pintarRespuestaMessage(items) {
     $("#resultadoMessage").append(myTable);
 }
 
-// {"startDate":"2020-12-20","devolutionDate":"2020-12-20",
-// "client":{"idClient":1},"partyroom":{"id":1}}
-
+// 	{"startDate":"2020-12-20","devolutionDate":"2020-12-20","client":{"idClient":1},"partyroom":{"id":1}}
 function guardarInformacionReservation() {
 
     $("#resultadoReservation").empty();
@@ -322,7 +301,7 @@ function guardarInformacionReservation() {
     $.ajax(
         {
 
-            url: 'http://129.158.213.90/api/Reservation/save',
+            url: 'http://localhost:8080/api/Reservation/save',
             type: 'POST',
             data: dataToSend,
             datatype: "JSON",
@@ -342,7 +321,7 @@ function guardarInformacionReservation() {
 function traerInformacionReservation() {
     $.ajax(
         {
-            url: "http://129.158.213.90/api/Reservation/all",
+            url: "http://localhost:8080/api/Reservation/all",
             type: "GET",
             datatype: "JSON",
             success: function (respuesta) {
@@ -374,29 +353,26 @@ function pintarRespuestaReservation(items) {
 
     //declarar variables js
     let myTable = "<table>";
-    myTable += "<tr><th>Codigo Reserva</th><th> Fecha Inicio</th><th>Fecha fin</th><th>Status</th><th>Codigo Partyroom</th><th>Nombre Partyroom</th><th>Dueño Partyroom</th><th>Capacidad Partyroom</th><th>Descripcion Partyroom</th><th>Codigo Categoria</th><th>Nombre Categoria</th><th>Descripcion Categoria</th><th>Codigo Mensaje</th><th>Mensaje</th><th>Codigo Cliente</th><th>Correo Cliente</th><th>Password Cliente</th><th>Nombre Cliente</th><th>Edad Cliente</th><th>Calificacion</th></tr>";
+    myTable += "<tr><th>Codigo Reservacion</th><th> Fecha Inicio</th><th>Fecha Fin</th><th>Status</th><th>Nombre Partyroom</th><th>Codigo Cliente</th><th>Nombre Cliente</th></tr><th>Correo Cliente</th><th>Calificacion</th><th>Mensaje Calificacion</th></tr>";
+
+    /*
+     <th>Mensaje</th>
+     */
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
         myTable += "<td>" + items[i].idReservation + "</td>";
         myTable += "<td>" + items[i].startDate + "</td>";
         myTable += "<td>" + items[i].devolutionDate + "</td>";
         myTable += "<td>" + items[i].status + "</td>";
-        myTable += "<td>" + items[i].partyroom.id + "</td>";
         myTable += "<td>" + items[i].partyroom.name + "</td>";
-        myTable += "<td>" + items[i].partyroom.owner + "</td>";
-        myTable += "<td>" + items[i].partyroom.capacity + "</td>";
-        myTable += "<td>" + items[i].partyroom.description + "</td>";
-        myTable += "<td>" + items[i].category.id + "</td>";
-        myTable += "<td>" + items[i].category.name + "</td>";
-        myTable += "<td>" + items[i].category.description + "</td>";
-        myTable += "<td>" + items[i].messages.id + "</td>";
-        myTable += "<td>" + items[i].messages.messageText + "</td>";
+        //myTable += "<td>" + items[i].category.name + "</td>";
         myTable += "<td>" + items[i].client.idClient + "</td>";
         myTable += "<td>" + items[i].client.email + "</td>";
         myTable += "<td>" + items[i].client.password + "</td>";
         myTable += "<td>" + items[i].client.name + "</td>";
-        myTable += "<td>" + items[i].client.age + "</td>";
+        myTable += "<td>" + items[i].client.email + "</td>";
         myTable += "<td>" + items[i].score.stars + "</td>";
+        myTable += "<td>" + items[i].score.messageText + "</td>";
 
         // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
         myTable += "</tr>";
@@ -404,18 +380,19 @@ function pintarRespuestaReservation(items) {
     myTable += "</table>";
     $("#resultadoReservation").append(myTable);
 }
-///
+
+
 function guardarInformacionScore() {
 
     $("#resultadoScore").empty();
 
-    let myData = { messageText: $("#mensaje").val(), stars: $("#calificacion").val(), reservation: { idReservation: $("#idReservationS").val() } }
+    let myData = { messageText: $("#mensajeR").val(), stars: $("#calificacion").val(), reservation: { idReservation: $("#idReservacion").val() } }
     let dataToSend = JSON.stringify(myData);
 
     $.ajax(
         {
 
-            url: 'http://129.158.213.90/api/Score/save',
+            url: 'http://localhost:8080/api/Score/save',
             type: 'POST',
             data: dataToSend,
             datatype: "JSON",
@@ -438,13 +415,13 @@ function guardarInformacionAdmin() {
 
     $("#resultadoAdmin").empty();
 
-    let myData = { name: $("#nameAdmin").val(), email: $("#emailAdmin").val(), password: $("#passwordAmin").val() }
+    let myData = { name: $("#nameAdmin").val(), email: $("#emailAdmin").val(), password: $("#passwordAdmin").val() }
     let dataToSend = JSON.stringify(myData);
 
     $.ajax(
         {
 
-            url: 'http://129.158.213.90/api/Admin/save',
+            url: 'http://localhost:8080/api/Admin/save',
             type: 'POST',
             data: dataToSend,
             datatype: "JSON",
@@ -464,7 +441,7 @@ function guardarInformacionAdmin() {
 function traerInformacionAdmin() {
     $.ajax(
         {
-            url: "http://129.158.213.90/api/Admin/all",
+            url: "http://localhost:8080/api/Admin/all",
             type: "GET",
             datatype: "JSON",
             success: function (respuesta) {
@@ -485,16 +462,14 @@ function pintarRespuestaAdmin(items) {
 
     $("#resultadoAdmin").empty();
 
-    //declarar variables js
+
     let myTable = "<table>";
     myTable += "<tr><th>Codigo Admin</th><th> Nombre Admin</th><th>Email Admin</th></tr>";
-    //<th>Password Admin</th></tr>";
     for (i = 0; i < items.length; i++) {
         myTable += "<tr>";
         myTable += "<td>" + items[i].idAdmin + "</td>";
         myTable += "<td>" + items[i].name + "</td>";
         myTable += "<td>" + items[i].email + "</td>";
-        myTable += "<td>" + items[i].password + "</td>";
 
         // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
         myTable += "</tr>";
@@ -503,3 +478,48 @@ function pintarRespuestaAdmin(items) {
     $("#resultadoAdmin").append(myTable);
 }
 
+function traerInformacionScore() {
+    $.ajax(
+        {
+            url: "http://localhost:8080/api/Score/all",
+            type: "GET",
+            datatype: "JSON",
+            success: function (respuesta) {
+                pintarRespuestaScore(respuesta);
+            },
+            error: function (xhr, status) {
+                alert('Operacion no satisfactoria,' + xhr.status);
+            }
+
+
+        }
+
+    );
+}
+
+
+function pintarRespuestaScore(items) {
+
+    $("#resultadoScore").empty();
+
+    //declarar variables js
+    let myTable = "<table>";
+    myTable += "<tr><th>Codigo Res</th><th> Fecha Inicio</th><th>Fecha fin</th><th>Status</th><th>Codigo Partyroom</th><th>Nombre Partyroom</th><th>Codigo Cliente</th><th>Nombre Cliente</th><th>Calificacion</th></tr>";
+    for (i = 0; i < items.length; i++) {
+        myTable += "<tr>";
+        myTable += "<td>" + items[i].reservation.idReservation + "</td>";
+        myTable += "<td>" + items[i].reservation.startDate + "</td>";
+        myTable += "<td>" + items[i].reservation.devolutionDate + "</td>";
+        myTable += "<td>" + items[i].reservation.status + "</td>";
+        myTable += "<td>" + items[i].reservation.partyroom.idPartyroom + "</td>";
+        myTable += "<td>" + items[i].reservation.partyroom.name + "</td>";
+        myTable += "<td>" + items[i].reservation.client.idClient + "</td>";
+        myTable += "<td>" + items[i].reservation.client.name + "</td>";
+        // myTable += "<td>" + items[i].stars + "</td>";
+
+        // myTable+="<td><button onclick='borrarElemento("+items[i].id+")'>Borrar</button>";
+        myTable += "</tr>";
+    }
+    myTable += "</table>";
+    $("#resultadoScore").append(myTable);
+}
