@@ -23,18 +23,29 @@ public class ServiceScore {
         return repositoryScore.getScore(id);
     }
 
+    // public Score save(Score score) {
+    // if (score.getIdScore() == null) {
+    // return repositoryScore.save(score);
+    // } else {
+    // Optional<Score> score_1 = repositoryScore.getScore(score.getIdScore());
+    // if (score_1.isPresent()) {
+    // return score;
+    // } else {
+    // return repositoryScore.save(score);
+    // }
+
+    // }
+    // }
     public Score save(Score score) {
         if (score.getIdScore() == null) {
             return repositoryScore.save(score);
         } else {
-            Optional<Score> score_1 = repositoryScore.getScore(score.getIdScore());
-            if (score_1.isPresent()) {
-                return score;
-            } else {
+            Optional<Score> score1 = repositoryScore.getScore(score.getIdScore());
+            if (score1.isEmpty()) {
                 return repositoryScore.save(score);
+            } else {
+                return score;
             }
-
         }
     }
-
 }

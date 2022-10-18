@@ -1,12 +1,12 @@
 package com.ciclo3.mt.reto3.model;
 
 import javax.persistence.*;
-
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "score")
-public class Score {
+public class Score implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,8 @@ public class Score {
     private String messageText;
     private Integer stars;
 
-    @OneToOne(mappedBy = "score")
+    @OneToOne
+    @JoinColumn(name = "scoreId")
     @JsonIgnoreProperties("score")
     private Reservation reservation;
 

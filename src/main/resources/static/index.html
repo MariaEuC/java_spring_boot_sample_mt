@@ -15,8 +15,9 @@
 
     <div>
         <h1>Categorias</h1>
-        <input type="text" id="nombreCategory" placeholder="nombre categoria">
-        <input type="text" id="descripcionCategory" placeholder="descripcion categoria">
+        <input type="text" id="nameCategory" placeholder="nombre categoria">
+        <input type="text" id="descriptionCategory" placeholder="descripcion categoria">
+
         <button onclick="traerInformacionCategory()"> Consultar</button>
         <button onclick="guardarInformacionCategory()"> Insertar</button>
 
@@ -100,8 +101,8 @@
     <div>
         <h1>Calificacion Reserva</h1>
         <input type="text" id="mensajeR" placeholder="mensaje calificacion reserva">
-        <input type="text" id="calificacion" placeholder="calificacion reserva">
-        <input type="text" id="idReservacion" placeholder="id reserva">
+        <input type="number" id="calificacion" placeholder="calificacion reserva">
+        <input type="number" id="idReservacion" placeholder="id reserva">
 
         <button onclick="guardarInformacionScore()"> Insertar</button>
 

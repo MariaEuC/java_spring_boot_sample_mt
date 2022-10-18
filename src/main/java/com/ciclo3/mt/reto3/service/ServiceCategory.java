@@ -23,15 +23,28 @@ public class ServiceCategory {
         return repositoryCategory.getCategory(id);
     }
 
+    // public Category save(Category category) {
+    // if (category.getId() == null) {
+    // return repositoryCategory.save(category);
+    // } else {
+    // Optional<Category> category_1 =
+    // repositoryCategory.getCategory(category.getId());
+    // if (category_1.isPresent()) {
+    // return category;
+    // } else {
+    // return repositoryCategory.save(category);
+    // }
+    // }
+    // }
     public Category save(Category category) {
         if (category.getId() == null) {
             return repositoryCategory.save(category);
         } else {
-            Optional<Category> category_1 = repositoryCategory.getCategory(category.getId());
-            if (category_1.isPresent()) {
-                return category;
-            } else {
+            Optional<Category> category1 = repositoryCategory.getCategory(category.getId());
+            if (category1.isEmpty()) {
                 return repositoryCategory.save(category);
+            } else {
+                return category;
             }
         }
     }

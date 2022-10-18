@@ -23,15 +23,28 @@ public class ServiceMessage {
         return repositoryMessage.getMessage(id);
     }
 
+    // public Message save(Message message) {
+    // if (message.getIdMessage() == null) {
+    // return repositoryMessage.save(message);
+    // } else {
+    // Optional<Message> message_1 =
+    // repositoryMessage.getMessage(message.getIdMessage());
+    // if (message_1.isPresent()) {
+    // return message;
+    // } else {
+    // return repositoryMessage.save(message);
+    // }
+    // }
+    // }
     public Message save(Message message) {
         if (message.getIdMessage() == null) {
             return repositoryMessage.save(message);
         } else {
-            Optional<Message> message_1 = repositoryMessage.getMessage(message.getIdMessage());
-            if (message_1.isPresent()) {
-                return message;
-            } else {
+            Optional<Message> message1 = repositoryMessage.getMessage(message.getIdMessage());
+            if (message1.isEmpty()) {
                 return repositoryMessage.save(message);
+            } else {
+                return message;
             }
         }
     }

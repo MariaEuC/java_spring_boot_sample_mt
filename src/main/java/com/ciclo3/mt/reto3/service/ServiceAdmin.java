@@ -23,15 +23,27 @@ public class ServiceAdmin {
         return repositoryAdmin.getAdmin(id);
     }
 
+    // public Admin save(Admin admin) {
+    // if (admin.getIdAdmin() == null) {
+    // return repositoryAdmin.save(admin);
+    // } else {
+    // Optional<Admin> admin_1 = repositoryAdmin.getAdmin(admin.getIdAdmin());
+    // if (admin_1.isPresent()) {
+    // return admin;
+    // } else {
+    // return repositoryAdmin.save(admin);
+    // }
+    // }
+    // }
     public Admin save(Admin admin) {
         if (admin.getIdAdmin() == null) {
             return repositoryAdmin.save(admin);
         } else {
-            Optional<Admin> admin_1 = repositoryAdmin.getAdmin(admin.getIdAdmin());
-            if (admin_1.isPresent()) {
-                return admin;
-            } else {
+            Optional<Admin> admin1 = repositoryAdmin.getAdmin(admin.getIdAdmin());
+            if (admin1.isEmpty()) {
                 return repositoryAdmin.save(admin);
+            } else {
+                return admin;
             }
         }
     }

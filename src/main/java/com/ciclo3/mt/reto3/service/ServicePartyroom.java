@@ -22,15 +22,28 @@ public class ServicePartyroom {
         return repositoryPartyroom.getPartyroom(id);
     }
 
+    // public Partyroom save(Partyroom partyroom) {
+    // if (partyroom.getId() == null) {
+    // return repositoryPartyroom.save(partyroom);
+    // } else {
+    // Optional<Partyroom> partyroom_1 =
+    // repositoryPartyroom.getPartyroom(partyroom.getId());
+    // if (partyroom_1.isPresent()) {
+    // return partyroom;
+    // } else {
+    // return repositoryPartyroom.save(partyroom);
+    // }
+    // }
+    // }
     public Partyroom save(Partyroom partyroom) {
         if (partyroom.getId() == null) {
             return repositoryPartyroom.save(partyroom);
         } else {
-            Optional<Partyroom> partyroom_1 = repositoryPartyroom.getPartyroom(partyroom.getId());
-            if (partyroom_1.isPresent()) {
-                return partyroom;
-            } else {
+            Optional<Partyroom> partyroom1 = repositoryPartyroom.getPartyroom(partyroom.getId());
+            if (partyroom1.isEmpty()) {
                 return repositoryPartyroom.save(partyroom);
+            } else {
+                return partyroom;
             }
         }
     }

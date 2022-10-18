@@ -2,7 +2,7 @@ package com.ciclo3.mt.reto3.model;
 
 import java.util.Date;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,10 +35,9 @@ public class Reservation {
     @JsonIgnoreProperties({ "reservations", "messages" })
     private Client client;
 
-    @OneToOne
+    @OneToOne(cascade = { CascadeType.PERSIST }, mappedBy = "reservation")
     @JsonIgnoreProperties("reservation")
     private Score score;
-
 
     public Integer getIdReservation() {
         return this.idReservation;

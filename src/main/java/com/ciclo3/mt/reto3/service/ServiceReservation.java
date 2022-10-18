@@ -23,17 +23,30 @@ public class ServiceReservation {
         return repositoryReservation.getReservation(id);
     }
 
+    // public Reservation save(Reservation reservation) {
+    // if (reservation.getIdReservation() == null) {
+    // return repositoryReservation.save(reservation);
+    // } else {
+    // Optional<Reservation> reservation_1 =
+    // repositoryReservation.getReservation(reservation.getIdReservation());
+    // if (reservation_1.isPresent()) {
+    // return reservation;
+    // } else {
+    // return repositoryReservation.save(reservation);
+    // }
+
+    // }
+    // }
     public Reservation save(Reservation reservation) {
         if (reservation.getIdReservation() == null) {
             return repositoryReservation.save(reservation);
         } else {
-            Optional<Reservation> reservation_1 = repositoryReservation.getReservation(reservation.getIdReservation());
-            if (reservation_1.isPresent()) {
-                return reservation;
-            } else {
+            Optional<Reservation> reservation1 = repositoryReservation.getReservation(reservation.getIdReservation());
+            if (reservation1.isEmpty()) {
                 return repositoryReservation.save(reservation);
+            } else {
+                return reservation;
             }
-
         }
     }
 }

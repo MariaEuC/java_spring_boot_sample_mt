@@ -23,17 +23,28 @@ public class ServiceClient {
         return repositoryClient.getClient(idClient);
     }
 
+    // public Client save(Client client) {
+    // if (client.getIdClient() == null) {
+    // return repositoryClient.save(client);
+    // } else {
+    // Optional<Client> client_1 = repositoryClient.getClient(client.getIdClient());
+    // if (client_1.isPresent()) {
+    // return client;
+    // } else {
+    // return repositoryClient.save(client);
+    // }
+    // }
+    // }
     public Client save(Client client) {
         if (client.getIdClient() == null) {
             return repositoryClient.save(client);
         } else {
-            Optional<Client> client_1 = repositoryClient.getClient(client.getIdClient());
-            if (client_1.isPresent()) {
-                return client;
-            } else {
+            Optional<Client> client1 = repositoryClient.getClient(client.getIdClient());
+            if (client1.isEmpty()) {
                 return repositoryClient.save(client);
+            } else {
+                return client;
             }
         }
     }
-
 }
